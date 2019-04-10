@@ -8,33 +8,39 @@
         Novo Curso
       </button>
     </div>
-    <div class="card-body">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Curso</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let curso of cursos">
-            <td>{{ curso.id }}</td>
-            <td>{{ curso.title }}</td>
-            <td>
-              <span class="float-right">
-                <button class="btn btn-outline-warning mb-1 btn-sm">
-                  Atualizar
-                </button>
+  </div>
+  <div class="card-body">
+    <table
+      class="table table-hover"
+      *ngIf="(cursos$ | async) as cursos; else loading"
+    >
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Curso</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let curso of cursos">
+          <td>{{ curso.id }}</td>
+          <td>{{ curso.title }}</td>
+          <td>
+            <span class="float-right">
+              <button class="btn btn-outline-warning mb-1 btn-sm">
+                Atualizar
+              </button>
 
-                <button class="btn btn-outline-danger mb-1 btn-sm">
-                  Excluir
-                </button>
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+              <button class="btn btn-outline-danger mb-1 btn-sm">
+                Excluir
+              </button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #loading>
+      <span>Carregando cursos...</span>
+    </ng-template>
   </div>
 </div>
