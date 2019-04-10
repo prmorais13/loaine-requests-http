@@ -1,6 +1,12 @@
-<div class="alert alert-{{ tipo }}" role="alert">
-  {{ message }}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<div class="alert alert-{{ tipo }} no-margin" role="alert">
+  {{ mensagem }}
+  <button
+    type="button"
+    class="close"
+    data-dismiss="alert"
+    aria-label="Close"
+    (click)="onClose()"
+  >
     <span aria-hidden="true">&times;</span>
   </button>
 </div>

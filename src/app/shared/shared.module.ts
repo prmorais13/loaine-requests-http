@@ -4,8 +4,8 @@ import { AlertModalComponent } from './alert-modal/alert-modal.component';
 
 @NgModule({
   declarations: [AlertModalComponent],
-  imports: [
-    CommonModule
-  ]
+  exports: [AlertModalComponent],
+  imports: [CommonModule],
+  entryComponents: [AlertModalComponent]
 })
-export class SharedModule { }
+export class SharedModule {}
