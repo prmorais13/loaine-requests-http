@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, empty, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -23,7 +24,9 @@ export class CursosListaComponent implements OnInit {
 
   constructor(
     private cursoService: CursosService,
-    private alertService: AlertModalService // private modalService: BsModalService
+    private alertService: AlertModalService,
+    private router: Router,
+    private routeActivated: ActivatedRoute // private modalService: BsModalService
   ) {}
 
   ngOnInit() {
@@ -50,5 +53,10 @@ export class CursosListaComponent implements OnInit {
     // this.bsModelRef.content.tipo = 'danger';
     // this.bsModelRef.content.mensagem =
     //   'Erro ao carregar cursos. Tente novamente mais tarde.';
+  }
+
+  onEdit(id: number | string) {
+    // this.router.navigate(['cursos/editar', id]);
+    this.router.navigate(['editar', id], { relativeTo: this.routeActivated });
   }
 }
