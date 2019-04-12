@@ -69,18 +69,53 @@ export class CursosFormComponent implements OnInit {
     console.log(this.form.value);
     if (this.form.valid) {
       console.log('Submit');
-      this.cursosService.create(this.form.value).subscribe(
+
+      let msgSuccess = 'Curso criado com sucesso.';
+      let msgError = 'Erro ao criar curso. Tente novamente mais tarde.';
+      if (this.form.value.id) {
+        msgSuccess = 'Curso atualizado com sucesso.';
+        msgError = 'Erro ao atualizar curso. Tente novamente mais tarde.';
+      }
+
+      this.cursosService.save(this.form.value).subscribe(
         success => {
-          this.modal.showAlertSuccess('Curso criado com sucesso.');
+          this.modal.showAlertSuccess(msgSuccess);
           this.location.back();
-          // this.router.navigate(['/cursos']);
         },
-        error =>
-          this.modal.showAlertDanger(
-            'Erro ao criar curso. Tente novamente mais tarde.'
-          ),
-        () => console.log('Request completo.')
+        error => {
+          this.modal.showAlertDanger(msgError);
+        }
       );
+
+      // if (this.form.value.id) {
+      //   // Update
+      //   this.cursosService.update(this.form.value).subscribe(
+      //     success => {
+      //       this.modal.showAlertSuccess('Curso atualizado com sucesso.');
+      //       this.location.back();
+      //       // this.router.navigate(['/cursos']);
+      //     },
+      //     error =>
+      //       this.modal.showAlertDanger(
+      //         'Erro ao atualizar curso. Tente novamente mais tarde.'
+      //       ),
+      //     () => console.log('Update completo.')
+      //   );
+      // } else {
+      //   // Create
+      //   this.cursosService.create(this.form.value).subscribe(
+      //     success => {
+      //       this.modal.showAlertSuccess('Curso criado com sucesso.');
+      //       this.location.back();
+      //       // this.router.navigate(['/cursos']);
+      //     },
+      //     error =>
+      //       this.modal.showAlertDanger(
+      //         'Erro ao criar curso. Tente novamente mais tarde.'
+      //       ),
+      //     () => console.log('Request completo.')
+      //   );
+      // }
     }
   }
 

@@ -2,11 +2,11 @@
   "cursos": [
     {
       "id": 1,
-      "nome": "Angular"
+      "nome": "Angular Com NodeJs"
     },
     {
       "id": 2,
-      "nome": "React"
+      "nome": "React com NodeJs"
     },
     {
       "nome": "React com Javascript",
@@ -27,6 +27,14 @@
     {
       "id": 7,
       "nome": "Angular 10"
+    },
+    {
+      "id": 8,
+      "nome": "Material 8"
+    },
+    {
+      "id": 9,
+      "nome": "React com Javascript 6"
     }
   ]
 }
