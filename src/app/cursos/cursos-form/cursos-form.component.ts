@@ -27,10 +27,12 @@ export class CursosFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const { id, nome } = this.activatedRouter.snapshot.data['curso'];
+
     this.form = this.fb.group({
-      id: [null],
+      id: [id],
       nome: [
-        null,
+        nome,
         [
           Validators.required,
           Validators.minLength(3),
@@ -47,20 +49,20 @@ export class CursosFormComponent implements OnInit {
     //   });
     // });
 
-    this.activatedRouter.params
-      .pipe(
-        map((params: any) => params['id']),
-        switchMap(id => this.cursosService.loadById(id))
-      )
-      .subscribe(curso => this.updateForm(curso));
+    // this.activatedRouter.params
+    //   .pipe(
+    //     map((params: any) => params['id']),
+    //     switchMap(id => this.cursosService.loadById(id))
+    //   )
+    //   .subscribe(curso => this.updateForm(curso));
   }
 
-  updateForm(curso: any) {
-    this.form.patchValue({
-      id: curso.id,
-      nome: curso.nome
-    });
-  }
+  // updateForm(curso: any) {
+  //   this.form.patchValue({
+  //     id: curso.id,
+  //     nome: curso.nome
+  //   });
+  // }
 
   onSubmit() {
     this.submitted = true;

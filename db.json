@@ -23,6 +23,10 @@
     {
       "nome": "Angular 9",
       "id": 6
+    },
+    {
+      "id": 7,
+      "nome": "Angular 10"
     }
   ]
 }
