@@ -6,7 +6,6 @@ import { environment } from './../../environments/environment';
 import { tap, delay, take } from 'rxjs/operators';
 
 import { Curso } from '../models/curso';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
