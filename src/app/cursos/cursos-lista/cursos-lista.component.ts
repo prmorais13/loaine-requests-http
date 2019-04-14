@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, empty, Subject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, empty, Subject, EMPTY } from 'rxjs';
+import { catchError, take, switchMap } from 'rxjs/operators';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertModalService } from './../../shared/alert-modal.service';
@@ -46,7 +46,7 @@ export class CursosListaComponent implements OnInit {
         console.error(error);
         // this.error$.next(true);
         this.handleError();
-        return empty();
+        return EMPTY;
       })
     );
   }
@@ -69,9 +69,32 @@ export class CursosListaComponent implements OnInit {
   onDelete(curso: Curso) {
     this.cursoSelecionado = curso;
 
-    this.deleteModalRef = this.modalService.show(this.deleteModal, {
-      class: 'modal-sm'
-    });
+    // this.deleteModalRef = this.modalService.show(this.deleteModal, {
+    //   class: 'modal-sm'
+    // });
+    const result$ = this.alertService.showConfirm(
+      'Confirmação',
+      `Confirma remoção do curso ${curso.nome}?`
+    );
+
+    result$
+      .asObservable()
+      .pipe(
+        take(1),
+        switchMap(result =>
+          result ? this.cursosService.remove(curso.id) : EMPTY
+        )
+      )
+      .subscribe(
+        success => {
+          this.onRefresh();
+          this.alertService.showAlertSuccess(`Curso ${curso.nome} removido!`);
+        },
+        error =>
+          this.alertService.showAlertDanger(
+            'Erro ao remover curso. Tente novamente mais tarde.'
+          )
+      );
   }
 
   onConfirmDelete() {

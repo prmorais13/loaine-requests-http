@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 export enum AlertTypes {
   DANGER = 'danger',
@@ -35,5 +36,23 @@ export class AlertModalService {
 
   showAlertSuccess(mensagem: string) {
     this.showAlert(mensagem, AlertTypes.SUCCESS, 3000);
+  }
+
+  showConfirm(title: string, msg: string, okTxt?: string, cancelTxt?: string) {
+    const bsModelRef: BsModalRef = this.modalService.show(
+      ConfirmModalComponent
+    );
+    bsModelRef.content.title = title;
+    bsModelRef.content.msg = msg;
+
+    if (okTxt) {
+      bsModelRef.content.okTxt = okTxt;
+    }
+
+    if (cancelTxt) {
+      bsModelRef.content.cancelTxt = cancelTxt;
+    }
+
+    return (bsModelRef.content as ConfirmModalComponent).confirmResult;
   }
 }
