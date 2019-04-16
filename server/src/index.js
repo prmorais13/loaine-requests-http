@@ -17,7 +17,7 @@ app.post('/upload', multipartMiddleware, (req, res) => {
   res.json({ message: files });
 });
 
-app.use((err, res, req, next) => res, json({ error: err.message }));
+app.use((err, res, req, next) => res.json({ error: err.message }));
 
 app.listen(app.get('port'), () => {
   console.log('Servidor rodando na porta', app.get('port'));
