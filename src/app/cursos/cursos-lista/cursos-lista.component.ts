@@ -20,7 +20,7 @@ import { Cursos2Service } from '../cursos2.service';
 export class CursosListaComponent implements OnInit {
   // cursos: Curso[];
   // bsModelRef: BsModalRef;
-  @ViewChild('deleteModal') deleteModal;
+  @ViewChild('deleteModal', {static: true}) deleteModal;
   deleteModalRef: BsModalRef;
 
   cursos$: Observable<Curso[]>;
