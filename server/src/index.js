@@ -8,7 +8,12 @@ app.set('port', process.env.PORT || 8000);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 const multipartMiddleware = multipart({ uploadDir: './uploads' });
 app.post('/upload', multipartMiddleware, (req, res) => {
