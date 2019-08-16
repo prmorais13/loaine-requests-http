@@ -21,6 +21,14 @@ app.post('/upload', multipartMiddleware, (req, res) => {
   res.json({ message: files });
 });
 
+app.get('/downloadExcel', (req, res) => {
+  res.download('./server/uploads/report.xlsx');
+});
+
+app.get('/downloadPDF', (req, res) => {
+  res.download('./server/uploads/report.pdf');
+});
+
 app.listen(app.get('port'), () => {
   console.log('Servidor rodando na porta', app.get('port'));
 });
